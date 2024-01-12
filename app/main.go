@@ -19,7 +19,7 @@ func main() {
 
 	if exitError, ok := err.(*exec.ExitError); ok {
 		fmt.Println(exitError)
-		os.Exit(1)
+		os.Exit(exitError.ExitCode())
 	}
 
 	if err != nil {
