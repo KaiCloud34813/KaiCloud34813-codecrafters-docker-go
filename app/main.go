@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"os"
 	"os/exec"
@@ -15,8 +16,13 @@ func main() {
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 	err := cmd.Run()
+
+	if exitError, ok := err.(*exec.ExitError); ok {
+		fmt.Println(exitError)
+		os.Exit(1)
+	}
+
 	if err != nil {
 		log.Fatal(err)
-		os.Exit(1)
 	}
 }
